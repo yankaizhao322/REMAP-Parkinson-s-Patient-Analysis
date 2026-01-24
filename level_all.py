@@ -23,7 +23,6 @@ rename_map = {
 train_df.rename(columns=rename_map, inplace=True)
 test_df.rename(columns=rename_map, inplace=True)
 
-# === 分级简化分数 ===
 def simplify(score):
     if score in [0, 1]:
         return 1  # Mild

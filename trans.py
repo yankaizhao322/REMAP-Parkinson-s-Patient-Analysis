@@ -56,14 +56,12 @@ class EnhancedTransformerClassifier(nn.Module):
     def __init__(self, input_dim, num_classes, num_heads=4, hidden_dim=128, num_layers=2):
         super().__init__()
         self.embedding = nn.Linear(input_dim, hidden_dim)
-        self.pos_encoder = nn.Parameter(torch.randn(1, 1, hidden_dim))  # 可学习位置编码
         encoder_layers = nn.TransformerEncoderLayer(hidden_dim, num_heads)
         self.transformer = nn.TransformerEncoder(encoder_layers, num_layers)
         self.fc = nn.Linear(hidden_dim, num_classes)
 
     def forward(self, x):
         x = self.embedding(x).unsqueeze(1)  # [batch, 1, hidden]
-        x = x + self.pos_encoder           # 加入位置信息
         x = self.transformer(x).squeeze(1)
         return self.fc(x)
 

@@ -74,7 +74,6 @@ vocab = pipeline.named_steps['columntransformer'].named_transformers_['feat_text
 print(vocab)
 
 '''
-# === 分级简化分数 ===
 def simplify(score):
     if score in [0, 1]:
         return 1  # Mild
